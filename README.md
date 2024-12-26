@@ -30,7 +30,7 @@
    pip install colorama termcolor
    ```
 
-4. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable from the [releases section](#) and add it to your system's environment variables for easier access.
+4. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.
 
 ---
 
