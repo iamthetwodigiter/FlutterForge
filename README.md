@@ -1,3 +1,4 @@
+
 # Flutter Forge - Automated Flutter App Build and Rename Tool
 
 **Flutter Forge** is an automated tool designed to simplify and streamline the process of building and renaming Flutter apps. This script provides a seamless solution for automating app versioning, building APKs, and renaming APK files, making it easy for developers to manage Flutter builds efficiently.
@@ -29,13 +30,15 @@
    pip install colorama termcolor
    ```
 
+4. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable from the [releases section](#) and add it to your system's environment variables for easier access.
+
 ---
 
 ## Usage
 
 ### Command-Line Arguments
 
-The script accepts several command-line arguments to control its behavior. Below are the available options:
+The script and executable accept the same command-line arguments to control their behavior. Below are the available options:
 
 - `--build`: Initiates the build process. This is the main argument to start the APK build and renaming.
 - `--traceback`: Enables detailed error traceback. Useful for debugging errors during execution.
@@ -47,7 +50,10 @@ The script accepts several command-line arguments to control its behavior. Below
 
 ### Example Usage
 
-Below are various ways you can use the script with different arguments:
+You have two options for running the tool: using the **Python script** or the **compiled `.exe` file**.
+
+<details>
+<summary><strong>Using the Python Script</strong></summary>
 
 1. **Basic Build (with default settings):**
    ```bash
@@ -95,6 +101,61 @@ Below are various ways you can use the script with different arguments:
    ```bash
    python script.py --build --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
    ```
+
+</details>
+
+<details>
+<summary><strong>Using the `.exe` File</strong></summary>
+
+1. **Basic Build (with default settings):**
+   Ensure the `.exe` is added to your system's environment variables, then run:
+   ```bash
+   flutterforge.exe --build
+   ```
+
+2. **Build with Custom App Name:**
+   Specify a custom app name.
+   ```bash
+   flutterforge.exe --build --app-name "MyApp"
+   ```
+
+3. **Build with Custom App Version:**
+   Specify a custom app version.
+   ```bash
+   flutterforge.exe --build --app-version "v2.0.0"
+   ```
+
+4. **Build with Flutter Clean:**
+   Run `flutter clean` before building.
+   ```bash
+   flutterforge.exe --build --clean-build
+   ```
+
+5. **Build with Custom App Name and Version:**
+   Specify both custom app name and version.
+   ```bash
+   flutterforge.exe --build --app-name "MyApp" --app-version "v1.0.0"
+   ```
+
+6. **Build with Traceback (for detailed error output):**
+   Enable traceback for detailed error logs.
+   ```bash
+   flutterforge.exe --build --traceback
+   ```
+
+7. **Build with Custom App Name, Version, and Clean:**
+   Combine custom app name, version, and cleaning before building.
+   ```bash
+   flutterforge.exe --build --app-name "MyApp" --app-version "v3.1.0" --clean-build
+   ```
+
+8. **Build with All Options:**
+   Specify all options including custom app name, version, cleaning, and traceback.
+   ```bash
+   flutterforge.exe --build --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
+   ```
+
+</details>
 
 ---
 
