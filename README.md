@@ -1,4 +1,3 @@
-
 # Flutter Forge - Automated Flutter App Build and Rename Tool
 
 **Flutter Forge** is an automated tool designed to simplify and streamline the process of building and renaming Flutter apps. This script provides a seamless solution for automating app versioning, building APKs, and renaming APK files, making it easy for developers to manage Flutter builds efficiently.
@@ -8,6 +7,7 @@
 ## Features
 
 - **Automated Flutter Build**: Automatically builds Flutter APKs with `flutter build apk` commands.
+- **Universal APK Build**: Supports building universal APKs for all target architectures with the `--universal-build` option.
 - **APK Renaming**: Renames the APK files based on the app name and version.
 - **Clean Build Option**: Supports running `flutter clean` to remove old builds and ensure fresh builds.
 - **Customizable App Name and Version**: Allows customization of the app name and version during the build process.
@@ -41,6 +41,7 @@
 The script and executable accept the same command-line arguments to control their behavior. Below are the available options:
 
 - `--build`: Initiates the build process. This is the main argument to start the APK build and renaming.
+- `--universal-build`: Builds a universal APK for all target architectures.
 - `--traceback`: Enables detailed error traceback. Useful for debugging errors during execution.
 - `--app-name <name>`: Allows you to specify a custom app name instead of using the default detected name.
 - `--app-version <version>`: Allows you to specify a custom app version instead of using the default version detected from `pubspec.yaml`.
@@ -60,40 +61,40 @@ You have two options for running the tool: using the **Python script** or the **
    python script.py --build
    ```
 
-2. **Build with Custom App Name:**
+2. **Universal Build:**
+   Create a universal APK.
+   ```bash
+   python script.py --universal-build
+   ```
+
+3. **Build with Custom App Name:**
    Specify a custom app name.
    ```bash
    python script.py --build --app-name "MyApp"
    ```
 
-3. **Build with Custom App Version:**
+4. **Build with Custom App Version:**
    Specify a custom app version.
    ```bash
    python script.py --build --app-version "v2.0.0"
    ```
 
-4. **Build with Flutter Clean:**
+5. **Build with Flutter Clean:**
    Run `flutter clean` before building.
    ```bash
    python script.py --build --clean-build
    ```
 
-5. **Build with Custom App Name and Version:**
-   Specify both custom app name and version.
+6. **Universal Build with Custom App Name:**
+   Specify a custom app name while building a universal APK.
    ```bash
-   python script.py --build --app-name "MyApp" --app-version "v1.0.0"
+   python script.py --universal-build --app-name "MyApp"
    ```
 
-6. **Build with Traceback (for detailed error output):**
+7. **Build with Traceback (for detailed error output):**
    Enable traceback for detailed error logs.
    ```bash
    python script.py --build --traceback
-   ```
-
-7. **Build with Custom App Name, Version, and Clean:**
-   Combine custom app name, version, and cleaning before building.
-   ```bash
-   python script.py --build --app-name "MyApp" --app-version "v3.1.0" --clean-build
    ```
 
 8. **Build with All Options:**
@@ -113,40 +114,40 @@ You have two options for running the tool: using the **Python script** or the **
    flutterforge.exe --build
    ```
 
-2. **Build with Custom App Name:**
+2. **Universal Build:**
+   Create a universal APK.
+   ```bash
+   flutterforge.exe --universal-build
+   ```
+
+3. **Build with Custom App Name:**
    Specify a custom app name.
    ```bash
    flutterforge.exe --build --app-name "MyApp"
    ```
 
-3. **Build with Custom App Version:**
+4. **Build with Custom App Version:**
    Specify a custom app version.
    ```bash
    flutterforge.exe --build --app-version "v2.0.0"
    ```
 
-4. **Build with Flutter Clean:**
+5. **Build with Flutter Clean:**
    Run `flutter clean` before building.
    ```bash
    flutterforge.exe --build --clean-build
    ```
 
-5. **Build with Custom App Name and Version:**
-   Specify both custom app name and version.
+6. **Universal Build with Custom App Name:**
+   Specify a custom app name while building a universal APK.
    ```bash
-   flutterforge.exe --build --app-name "MyApp" --app-version "v1.0.0"
+   flutterforge.exe --universal-build --app-name "MyApp"
    ```
 
-6. **Build with Traceback (for detailed error output):**
+7. **Build with Traceback (for detailed error output):**
    Enable traceback for detailed error logs.
    ```bash
    flutterforge.exe --build --traceback
-   ```
-
-7. **Build with Custom App Name, Version, and Clean:**
-   Combine custom app name, version, and cleaning before building.
-   ```bash
-   flutterforge.exe --build --app-name "MyApp" --app-version "v3.1.0" --clean-build
    ```
 
 8. **Build with All Options:**
