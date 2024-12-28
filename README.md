@@ -31,7 +31,19 @@
    pip install -r requirements.txt
    ```
 
-4. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.
+4. **env**: Create `.env` file inside project directory with the following data
+
+```
+REPO_OWNER=YOUR_GITHUB_USERNAME
+REPO_NAME=YOUR_REPO_NAME
+GITHUB_TOKEN=YOUR_GITHUB_TOKEN
+
+TAG_NAME=RELEASE_TAG
+RELEASE_NAME=RELEASE_TITLE
+RELEASE_BODY=RELEASE_DESCRIPTION
+```
+
+5. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.
 
 ---
 
@@ -56,56 +68,56 @@
 
 1. **Basic Build (with default settings):**
    ```bash
-   python script.py --build
+   python main.py --build
    ```
 
 2. **Universal Build:**
    Build a universal APK.
    ```bash
-   python script.py --universal-build
+   python main.py --universal-build
    ```
 
 3. **Start GitHub Release Process:**
    This command triggers the process to create a GitHub release and upload the APK to the release assets.
    > The apk files should be present inside the default folder for standalone release command to work without build command
    ```bash
-   python script.py --release
+   python main.py --release
    ```
 
 4. **Build with Custom App Name:**
    Specify a custom app name.
    ```bash
-   python script.py --build --app-name "MyApp"
+   python main.py --build --app-name "MyApp"
    ```
 
 5. **Build with Custom App Version:**
    Specify a custom app version.
    ```bash
-   python script.py --build --app-version "v2.0.0"
+   python main.py --build --app-version "v2.0.0"
    ```
 
 6. **Build with Flutter Clean:**
    Run `flutter clean` before building.
    ```bash
-   python script.py --build --clean-build
+   python main.py --build --clean-build
    ```
 
 7. **Universal Build with Custom App Name:**
    Build a universal APK with a custom app name.
    ```bash
-   python script.py --universal-build --app-name "MyApp"
+   python main.py --universal-build --app-name "MyApp"
    ```
 
 8. **Build with Traceback (for detailed error output):**
    Enable traceback for detailed error logs.
    ```bash
-   python script.py --build --traceback
+   python main.py --build --traceback
    ```
 
 9. **Start GitHub Release Process with All Options:**
    Trigger the GitHub release process, with custom app name, version, cleaning, and traceback.
    ```bash
-   python script.py --build --universal-build --release --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
+   python main.py --build --universal-build --release --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
    ```
 
 </details>
@@ -202,7 +214,7 @@ The entire process is encapsulated within a class for better code reusability an
 1. **Set Up**: Configure the `.env` file with the necessary details (GitHub Token, Repository Owner, Repository Name, etc.).
 2. **Run the Release**: Execute the release script to create a GitHub release and upload the assets:
    ```bash
-   python github_release.py
+   python main.py
    ```
 
 ---
