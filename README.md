@@ -183,6 +183,30 @@ To ensure this works, you'll need to have GitHub credentials stored in your envi
 
 ---
 
+## GitHub Release Automation
+
+This tool automates the process of creating a release on GitHub and uploading assets (e.g., APK files or executables) to the release.
+
+### Prerequisites:
+- **Git Repository**: The project folder must have a Git repository initialized for better functionality.
+- **.env Configuration**: Ensure that the `.env` file is set up with your GitHub repository details and Access Token for authentication.
+  
+### How It Works:
+1. **Configuration Check**: The script first checks for the `.git/config` file in the project directory to automatically retrieve the repository details. If not found, it falls back to values provided in the `.env` file.
+2. **Create Release**: Using GitHub's REST API, the script creates a release with the specified version, release notes, and other metadata.
+3. **Upload Assets**: After creating the release, the script uploads specified assets (such as APKs or executables) to the release.
+
+The entire process is encapsulated within a class for better code reusability and organization.
+
+### How to Use:
+1. **Set Up**: Configure the `.env` file with the necessary details (GitHub Token, Repository Owner, Repository Name, etc.).
+2. **Run the Release**: Execute the release script to create a GitHub release and upload the assets:
+   ```bash
+   python github_release.py
+   ```
+
+---
+
 ## Error Handling
 
 In case of an error, the script will display an appropriate message and can show a detailed traceback if the `--traceback` argument is used. Common errors include missing files or directories, such as the `pubspec.yaml` file, `.env` file or the APK directory.
