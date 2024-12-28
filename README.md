@@ -11,6 +11,7 @@
 - **APK Renaming**: Renames the APK files based on the app name and version.
 - **Clean Build Option**: Supports running `flutter clean` to remove old builds and ensure fresh builds.
 - **Customizable App Name and Version**: Allows customization of the app name and version during the build process.
+- **GitHub Release**: Allows assets to be uploaded to GitHub creating a new release with desired tag, title and description.
 - **Error Handling with Traceback**: Provides detailed error tracebacks for troubleshooting.
 - **Cross-Platform Support**: Works on both Windows and Unix-based systems.
 
