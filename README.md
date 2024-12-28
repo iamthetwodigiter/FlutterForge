@@ -38,20 +38,17 @@
 
 ### Command-Line Arguments
 
-The script and executable accept the same command-line arguments to control their behavior. Below are the available options:
-
-- `--build`: Initiates the build process. This is the main argument to start the APK build and renaming.
-- `--universal-build`: Builds a universal APK for all target architectures.
-- `--traceback`: Enables detailed error traceback. Useful for debugging errors during execution.
-- `--app-name <name>`: Allows you to specify a custom app name instead of using the default detected name.
-- `--app-version <version>`: Allows you to specify a custom app version instead of using the default version detected from `pubspec.yaml`.
-- `--clean-build`: If enabled, runs `flutter clean` before building the APKs to ensure a fresh build.
+- `--build`: Initiates the build process, including APK creation and renaming.
+- `--universal-build`: Builds a universal APK that supports all target architectures.
+- `--traceback`: Enables detailed error traceback for debugging.
+- `--app-name <name>`: Specifies a custom app name instead of using the default detected name.
+- `--app-version <version>`: Specifies a custom app version instead of using the version from `pubspec.yaml`.
+- `--clean-build`: Runs `flutter clean` before building, ensuring a fresh build.
+- `--release`: Starts the GitHub release process for the app, creating a new release on GitHub.
 
 ---
 
 ### Example Usage
-
-You have two options for running the tool: using the **Python script** or the **compiled `.exe` file**.
 
 <details>
 <summary><strong>Using the Python Script</strong></summary>
@@ -62,45 +59,52 @@ You have two options for running the tool: using the **Python script** or the **
    ```
 
 2. **Universal Build:**
-   Create a universal APK.
+   Build a universal APK.
    ```bash
    python script.py --universal-build
    ```
 
-3. **Build with Custom App Name:**
+3. **Start GitHub Release Process:**
+   This command triggers the process to create a GitHub release and upload the APK to the release assets.
+   > The apk files should be present inside the default folder for standalone release command to work without build command
+   ```bash
+   python script.py --release
+   ```
+
+4. **Build with Custom App Name:**
    Specify a custom app name.
    ```bash
    python script.py --build --app-name "MyApp"
    ```
 
-4. **Build with Custom App Version:**
+5. **Build with Custom App Version:**
    Specify a custom app version.
    ```bash
    python script.py --build --app-version "v2.0.0"
    ```
 
-5. **Build with Flutter Clean:**
+6. **Build with Flutter Clean:**
    Run `flutter clean` before building.
    ```bash
    python script.py --build --clean-build
    ```
 
-6. **Universal Build with Custom App Name:**
-   Specify a custom app name while building a universal APK.
+7. **Universal Build with Custom App Name:**
+   Build a universal APK with a custom app name.
    ```bash
    python script.py --universal-build --app-name "MyApp"
    ```
 
-7. **Build with Traceback (for detailed error output):**
+8. **Build with Traceback (for detailed error output):**
    Enable traceback for detailed error logs.
    ```bash
    python script.py --build --traceback
    ```
 
-8. **Build with All Options:**
-   Specify all options including custom app name, version, cleaning, and traceback.
+9. **Start GitHub Release Process with All Options:**
+   Trigger the GitHub release process, with custom app name, version, cleaning, and traceback.
    ```bash
-   python script.py --build --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
+   python script.py --build --universal-build --release --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
    ```
 
 </details>
@@ -108,60 +112,78 @@ You have two options for running the tool: using the **Python script** or the **
 <details>
 <summary><strong>Using the `.exe` File</strong></summary>
 
-1. **Basic Build (with default settings):**
-   Ensure the `.exe` is added to your system's environment variables, then run:
+1. **Start GitHub Release Process:**
+   This command triggers the GitHub release process, creating a new release and uploading the APK to the release assets.
    ```bash
-   flutterforge.exe --build
+   flutterforge.exe --release
    ```
 
 2. **Universal Build:**
-   Create a universal APK.
+   Build a universal APK.
    ```bash
    flutterforge.exe --universal-build
    ```
 
-3. **Build with Custom App Name:**
+3. **Start GitHub Release Process:**
+   This command triggers the process to create a GitHub release and upload the APK to the release assets.
+   > The apk files should be present inside the default folder for standalone release command to work without build command
+   ```bash
+   flutterforge.exe --release
+   ```
+
+4. **Build with Custom App Name:**
    Specify a custom app name.
    ```bash
    flutterforge.exe --build --app-name "MyApp"
    ```
 
-4. **Build with Custom App Version:**
+5. **Build with Custom App Version:**
    Specify a custom app version.
    ```bash
    flutterforge.exe --build --app-version "v2.0.0"
    ```
 
-5. **Build with Flutter Clean:**
+6. **Build with Flutter Clean:**
    Run `flutter clean` before building.
    ```bash
    flutterforge.exe --build --clean-build
    ```
 
-6. **Universal Build with Custom App Name:**
-   Specify a custom app name while building a universal APK.
+7. **Universal Build with Custom App Name:**
+   Build a universal APK with a custom app name.
    ```bash
    flutterforge.exe --universal-build --app-name "MyApp"
    ```
 
-7. **Build with Traceback (for detailed error output):**
+8. **Build with Traceback (for detailed error output):**
    Enable traceback for detailed error logs.
    ```bash
    flutterforge.exe --build --traceback
    ```
 
-8. **Build with All Options:**
-   Specify all options including custom app name, version, cleaning, and traceback.
+9. **Start GitHub Release Process with All Options:**
+   Trigger the GitHub release process, with custom app name, version, cleaning, and traceback.
    ```bash
-   flutterforge.exe --build --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
+   flutterforge.exe --build --universal-build --release --app-name "MyApp" --app-version "v4.0.0" --clean-build --traceback
    ```
 
 </details>
 
 ---
 
+### GitHub Release Process
+
+The `--release` command will initiate the GitHub release process by:
+
+1. **Creating a GitHub release**: It automatically creates a release on GitHub.
+2. **Uploading APKs**: It uploads the newly built APKs to the release assets.
+
+To ensure this works, you'll need to have GitHub credentials stored in your environment variables for the tool to authenticate and push the release.
+
+---
+
 ## Error Handling
 
-In case of an error, the script will display an appropriate message and can show a detailed traceback if the `--traceback` argument is used. Common errors include missing files or directories, such as the `pubspec.yaml` file or the APK directory.
+In case of an error, the script will display an appropriate message and can show a detailed traceback if the `--traceback` argument is used. Common errors include missing files or directories, such as the `pubspec.yaml` file, `.env` file or the APK directory.
 
 ---
