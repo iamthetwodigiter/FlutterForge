@@ -319,6 +319,7 @@ def main():
         x = build(args)
     if args.release:
         asset_files = asset_files_list()
+        print()
         colored_text("="*34, color='cyan')
         colored_text("\n| Starting the release process.. |\n", color='cyan')
         colored_text("="*34, color='cyan')
