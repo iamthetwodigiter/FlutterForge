@@ -125,17 +125,24 @@ class Build:
             == "y"
         )
         if clean_build:
-            run_command([FLUTTER, "clean"], description="CLEANING THE BUILD FOLDER")
-            run_command(
-                [FLUTTER, "pub", "get"],
-                description="RUNNING 'flutter pub get' TO DOWNLOAD ALL DEPENDENCIES",
-            )
+            asset_files = asset_files_list()
+            for files in asset_files:
+                os.remove(files)
+            try:
+                run_command([FLUTTER, "clean"], description="CLEANING THE BUILD FOLDER")
+                run_command(
+                    [FLUTTER, "pub", "get"],
+                    description="RUNNING 'flutter pub get' TO DOWNLOAD ALL DEPENDENCIES",
+                )
+            except:
+                raise ValueError("'flutter clean' failed!!!")
 
         # BUILD THE APPS
-        run_command(
-            [FLUTTER, "build", "apk", "--split-per-abi", "--release"],
-            description="BUILDING THE APPS [SPLIT PER ARCHITECTURE]",
-        )
+        if args.build:
+            run_command(
+                [FLUTTER, "build", "apk", "--split-per-abi", "--release"],
+                description="BUILDING THE APPS [SPLIT PER ARCHITECTURE]",
+            )
         if args.universal_build:
             run_command(
                 [FLUTTER, "build", "apk", "--release"],
@@ -303,7 +310,7 @@ def main():
     clear()
 
     app = pyfiglet.figlet_format('FlutterForge  v2.0',font='doom')
-    print(Fore.MAGENTA + app,)
+    print(Fore.MAGENTA + app)
     dev = pyfiglet.figlet_format('by  thetwodigiter',font='doom')
     print(Fore.BLUE + dev)
 
@@ -311,7 +318,7 @@ def main():
             "\nAn automated tool to build and rename Flutter apps and create GitHub Release\n\n",
             color="magenta",
         )
-    if args.build:
+    if args.build or args.universal_build:
         colored_text("="*32, color='cyan')
         colored_text("\n| Starting the build process.. |\n", color='cyan')
         colored_text("="*32, color='cyan')
@@ -326,14 +333,18 @@ def main():
         print()
         y = release(asset_files=asset_files)
 
-    if not args.build and not args.release:
-        colored_text("No valid option provided. Please use --build or --release.", color='yellow')
+    if (not(args.build or args.universal_build)) and (not args.release):
+        colored_text("No valid option provided. Please use either of the --build, --universal-build, or --release. arguments", color='yellow')
 
-    if args.build and args.release and x and y:
-        colored_text("="*37, color='cyan')
-        colored_text("\n| Process Completed Successfully... |\n", color='cyan')
-        colored_text("="*37, color='cyan')
+    # if (args.build or args.universal_build) and args.release and x and y:
+    if (args.build or args.universal_build) and x:
         print()
+        colored_text("="*37, color='green')
+        colored_text("\n| PROCESS COMPLETED SUCCESSFULLY... |\n", color='green')
+        colored_text("="*37, color='green')
+        print()
+        # success = pyfiglet.figlet_format('Process Completed',font='doom')
+        # print(Fore.GREEN + success)
 
 if __name__ == "__main__":
     main()
