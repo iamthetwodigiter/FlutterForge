@@ -43,7 +43,7 @@ RELEASE_NAME=RELEASE_TITLE
 RELEASE_BODY=RELEASE_DESCRIPTION
 ```
 
-5. **(Optional) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.
+5. **(Optional but Recommended) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.
 
 ---
 
@@ -214,7 +214,7 @@ The entire process is encapsulated within a class for better code reusability an
 1. **Set Up**: Configure the `.env` file with the necessary details (GitHub Token, Repository Owner, Repository Name, etc.).
 2. **Run the Release**: Execute the release script to create a GitHub release and upload the assets:
    ```bash
-   python main.py
+   python main.py --release
    ```
 
 ---
