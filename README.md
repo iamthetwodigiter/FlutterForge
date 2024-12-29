@@ -40,7 +40,7 @@ GITHUB_TOKEN=YOUR_GITHUB_TOKEN
 
 TAG_NAME=RELEASE_TAG
 RELEASE_NAME=RELEASE_TITLE
-RELEASE_BODY=RELEASE_DESCRIPTION
+RELEASE_BODY=RELEASE_DESCRIPTION [Supports multiline description with \n]
 ```
 
 5. **(Optional but Recommended) Flutter Forge Executable**: If you want to use the `.exe` version (for Windows), download the executable and add it to your system's environment variables for easier access.

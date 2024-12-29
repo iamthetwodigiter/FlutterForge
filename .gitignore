@@ -1,1 +1,3 @@
+# .env file can be inside the path where the executable is present but needs to be configured for every project and is not recommended
+# create a new .env file inside every project directory
 /.env
