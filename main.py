@@ -8,6 +8,8 @@ import subprocess
 import requests
 from dotenv import load_dotenv
 import argparse
+from colorama import Fore
+import pyfiglet
 
 CURRENT_DIR = Path.cwd()
 APK_DIR = CURRENT_DIR / "build/app/outputs/flutter-apk"
@@ -48,7 +50,7 @@ def asset_files_list() -> list:
         if file.name == "app-debug.apk":
             continue
         else:
-            asset_files.append((f'{APK_DIR}\{file.name}'))
+            asset_files.append((f'{APK_DIR}/{file.name}'))
     return asset_files if len(asset_files) != 0 else ValueError("No asset files found to be released")
 
 class Build:
@@ -79,19 +81,19 @@ class Build:
                     "-release", ""
                 )
             file.rename(APK_DIR / new_name)
-        t = len(f"\nAPKS RENAMED SUCCESSFULLY\nAPPS CAN BE FOUND IN {APK_DIR}\n")
-        colored_text("="*t+4, color="light_green")
+        t = len(f"APKS RENAMED SUCCESSFULLY AND CAN BE FOUND IN {APK_DIR}")
+        colored_text("="*(t+4), color="light_green")
         colored_text(
-            f"\n| APKS RENAMED SUCCESSFULLY\nAPPS CAN BE FOUND IN {APK_DIR} |\n", color="light_green"
+            f"\n| APKS RENAMED SUCCESSFULLY AND CAN BE FOUND IN {APK_DIR} |\n", color="light_green"
         )
-        colored_text("="*t+4, color="light_green")
+        colored_text("="*(t+4), color="light_green")
 
     # MAIN FUNCTION
     def build(self, args) -> list:
     
         # APP NAME
         colored_text(
-            "\nDetected App Name => ", color="yellow", text_2=f"{self.extracted_app_name}\n", color_2="cyan"
+            "\nDetected App Name => ", color="magenta", text_2=f"{self.extracted_app_name}\n", color_2="cyan"
         )
         app_name = (
             args.app_name
@@ -104,7 +106,7 @@ class Build:
         # APP VERSION
         app_version = f"v{self.find_version()}"
         colored_text(
-            "\nDetected App Version => ", color="yellow",text_2=f"{app_version}\n", color_2="cyan"
+            "\nDetected App Version => ", color="magenta",text_2=f"{app_version}\n", color_2="cyan"
         )
         app_version = (
             args.app_version
@@ -171,11 +173,11 @@ class GitHub:
         self.GENERATE_RELEASE_NOTES = False
         self.ASSET_FILES = asset_files
 
-        colored_text(text="\n\nDetected GitHub Repository => ", color="yellow", text_2=self.REPO_NAME, color_2="cyan")
-        colored_text(text="\nDetected Tag => ", color="yellow", text_2=self.TAG_NAME, color_2="cyan")
-        colored_text(text="\nDetected Release Name => ", color="yellow", text_2=self.RELEASE_NAME, color_2="cyan")
-        colored_text(text="\nDetected Release Description => ", color="yellow", text_2=self.RELEASE_BODY, color_2="cyan")
-        colored_text(text="\nDetected Assets =>\n", color="yellow", text_2="\n".join(self.ASSET_FILES), color_2="cyan")
+        colored_text(text="\n\nDetected GitHub Repository => ", color="magenta", text_2=self.REPO_NAME, color_2="cyan")
+        colored_text(text="\nDetected Tag => ", color="magenta", text_2=self.TAG_NAME, color_2="cyan")
+        colored_text(text="\nDetected Release Name => ", color="magenta", text_2=self.RELEASE_NAME, color_2="cyan")
+        colored_text(text="\nDetected Release Description => ", color="magenta", text_2=self.RELEASE_BODY, color_2="cyan")
+        colored_text(text="\nDetected Assets =>\n", color="magenta", text_2="\n".join(self.ASSET_FILES), color_2="cyan")
 
     def git_config(self) -> list:
         """Fetches the repository info from the .git/config file."""
@@ -233,7 +235,7 @@ class GitHub:
         with open(file_path, "rb") as file_data:
             response = requests.post(upload_url, headers=headers, params=params, data=file_data)
             if response.status_code == 201:
-                colored_text(text=f"\nUploaded asset: ",color="yellow", text_2=file_name, color_2="cyan")
+                colored_text(text=f"\nUploaded asset: ",color="magenta", text_2=file_name, color_2="cyan")
             else:
                 raise ValueError(f"Failed to upload asset {file_name}: {response.status_code}, {response.text}")
 
@@ -299,8 +301,14 @@ def main():
     """Main function to control the flow of the build and release process."""
     args = parse_args()
     clear()
+
+    app = pyfiglet.figlet_format('FlutterForge  v2.0',font='doom')
+    print(Fore.MAGENTA + app,)
+    dev = pyfiglet.figlet_format('by  thetwodigiter',font='doom')
+    print(Fore.BLUE + dev)
+
     colored_text(
-            "\nWelcome to Flutter Forge - an automated tool to build and rename Flutter apps by thetwodigiter❤️\n",
+            "\nAn automated tool to build and rename Flutter apps and create GitHub Release\n\n",
             color="magenta",
         )
     if args.build:
@@ -320,7 +328,7 @@ def main():
     if not args.build and not args.release:
         colored_text("No valid option provided. Please use --build or --release.", color='yellow')
 
-    if x and y:
+    if args.build and args.release and x and y:
         colored_text("="*37, color='cyan')
         colored_text("\n| Process Completed Successfully... |\n", color='cyan')
         colored_text("="*37, color='cyan')
